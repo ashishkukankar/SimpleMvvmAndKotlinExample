@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:id="@+id/useridtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User ID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/useridedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Userid"
+        app:layout_constraintTop_toBottomOf="@+id/useridtext"
+        tools:layout_margin="10dp" />
+
+    <TextView
+        android:id="@+id/firstNametext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/useridedit"
+        tools:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/firstNameedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="first name"
+        app:layout_constraintTop_toBottomOf="@+id/firstNametext"
+        tools:layout_margin="10dp" />
+
+    <TextView
+        android:id="@+id/lastNametext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="last Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/firstNameedit"
+        tools:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/lastNameedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="last name"
+        app:layout_constraintTop_toBottomOf="@+id/lastNametext"
+        tools:layout_margin="10dp" />
+
+
+    <TextView
+        android:id="@+id/gendertext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="last Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lastNameedit"
+        tools:layout_margin="10dp" />
+
+    <RadioGroup
+        android:id="@+id/radiogrp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/gendertext"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+        <RadioButton
+            android:id="@+id/malerbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            />
+        <RadioButton
+            android:id="@+id/femalerbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Female"
+            />
+    </RadioGroup>
+    <TextView
+        android:id="@+id/dobtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="last Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radiogrp"
+        tools:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/dobedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="last name"
+        app:layout_constraintTop_toBottomOf="@+id/dobtext"
+        tools:layout_margin="10dp" />
+
+    <TextView
+        android:id="@+id/emailtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="last Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dobedit"
+        tools:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/emailedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="last name"
+        app:layout_constraintTop_toBottomOf="@+id/emailtext"
+        tools:layout_margin="10dp" />
+
+    <TextView
+        android:id="@+id/cellnotext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="last Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailedit"
+        tools:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/cellnoedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="last name"
+        app:layout_constraintTop_toBottomOf="@+id/cellnotext"
+        tools:layout_margin="10dp" />
+
+    <TextView
+        android:id="@+id/addresstxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="last Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cellnoedit"
+        tools:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/addressedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="last name"
+        app:layout_constraintTop_toBottomOf="@+id/addresstxt"
+        tools:layout_margin="10dp" />
+
+
+    <TextView
+        android:id="@+id/userroletxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Role"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addressedit"
+        tools:layout_margin="10dp" />
+
+    <RadioGroup
+        android:id="@+id/role_radiogrp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/userroletxt"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+        <RadioButton
+            android:id="@+id/patientrbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Patient"
+            />
+        <RadioButton
+            android:id="@+id/clinicianrbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Clinician"
+            />
+    </RadioGroup>
+    <TextView
+        android:id="@+id/hospitalidtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hospital Id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/role_radiogrp"
+        tools:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/hospitalidedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="last name"
+        app:layout_constraintTop_toBottomOf="@+id/hospitalidtxt"
+        tools:layout_margin="10dp" />
+
+    <TextView
+        android:id="@+id/doctoridtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Doctor Id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hospitalidedit"
+        tools:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/doctoridedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Doctor Id"
+        app:layout_constraintTop_toBottomOf="@+id/doctoridtxt"
+        tools:layout_margin="10dp" />
+
+    <TextView
+        android:id="@+id/devicetxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Device Id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/doctoridedit"
+        tools:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/deviceedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Doctor Id"
+        app:layout_constraintTop_toBottomOf="@+id/devicetxt"
+        tools:layout_margin="10dp" />
+
+    <Button
+        android:id="@+id/submitbutton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="SUBMIT"
+        android:background="#3361FF"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deviceedit"
+        tools:layout_margin="10dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
