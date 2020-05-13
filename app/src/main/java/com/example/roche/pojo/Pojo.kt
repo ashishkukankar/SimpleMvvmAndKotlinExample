@@ -38,3 +38,7 @@ data class UserData(var statusMsg:String,
 
 data class UserList(var statusMsg:String,
                     var data: MutableList<User>)
+
+data class Status(var code:Int,
+                  var message:String
+)

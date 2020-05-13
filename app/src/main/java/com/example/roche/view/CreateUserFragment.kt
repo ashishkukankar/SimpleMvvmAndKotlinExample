@@ -1,16 +1,15 @@
 package com.example.roche.view
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.RadioButton
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -19,8 +18,10 @@ import com.example.roche.R
 import com.example.roche.model.CreateUserModelView
 import com.example.roche.pojo.SensorData
 import com.example.roche.pojo.User
-import java.time.Year
+import com.example.roche.utils.Utils
 import java.util.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 private val EXISTING_USER = "Existing USER"
@@ -43,13 +44,14 @@ class CreateUserFragment : Fragment(),View.OnClickListener,DatePickerDialog.OnDa
     lateinit var mPatientrb:RadioButton
     lateinit var mClinician:RadioButton
     lateinit var mSubmitbtn:Button
+    lateinit var progressbar:ProgressBar
 
     lateinit var viewModel:ViewModel
-     var mContext = getContext()
+
      var mYear: Int = 0
      var mDate:Int  = 0
      var mMonth:Int = 0
-
+   lateinit var mContext:Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +63,8 @@ class CreateUserFragment : Fragment(),View.OnClickListener,DatePickerDialog.OnDa
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(requireActivity()).get(CreateUserModelView::class.java)
+        mContext = this!!.context!!
+         viewModel = ViewModelProvider(requireActivity()).get(CreateUserModelView::class.java)
         mView = inflater.inflate(R.layout.layout_createusers, container, false);
 
         mUserid = mView.findViewById(R.id.useridedit)
@@ -79,10 +82,10 @@ class CreateUserFragment : Fragment(),View.OnClickListener,DatePickerDialog.OnDa
         mPatientrb = mView.findViewById(R.id.patientrbtn)
         mClinician = mView.findViewById(R.id.clinicianrbtn)
         mSubmitbtn = mView.findViewById(R.id.submitbutton)
+        progressbar = mView.findViewById(R.id.progress_circular)
 
 
         mSubmitbtn.setOnClickListener(this)
-        mDob.isEnabled = false
 
         mDob.setOnClickListener(this)
 
@@ -92,8 +95,8 @@ class CreateUserFragment : Fragment(),View.OnClickListener,DatePickerDialog.OnDa
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.dobedit->{
+        when(v?.id) {
+            R.id.dobedit -> {
                 val calendar: Calendar = Calendar.getInstance(TimeZone.getDefault())
                 val dialog = mContext?.let {
                     DatePickerDialog(
@@ -105,20 +108,21 @@ class CreateUserFragment : Fragment(),View.OnClickListener,DatePickerDialog.OnDa
                 dialog?.show()
             }
 
-            R.id.submitbutton->{
-                if(validate()){
-                    (viewModel as CreateUserModelView).
-                    createUser(updateValue()).observe(this, Observer {
-                        print(it)
+            R.id.submitbutton -> {
+                if (Utils.checkNetworkConnectivity(mContext)) {
+                    if (validate()) {
+                        progressbar.visibility = View.VISIBLE
+                        (viewModel as CreateUserModelView).createUser(updateValue())
+                            .observe(this, Observer {
+                                progressbar.visibility = View.GONE
 
-                        activity?.
-                        supportFragmentManager?.
-                        beginTransaction()?.
-                        replace(android.R.id.content,ExistingUserFragment())?.
-                        addToBackStack(EXISTING_USER)?.
-                        commit()
-                    })
-
+                                activity?.supportFragmentManager?.beginTransaction()
+                                    ?.replace(android.R.id.content, ExistingUserFragment())
+                                    ?.addToBackStack(EXISTING_USER)?.commit()
+                            })
+                    }
+                }else{
+                    showAlertMessage("Wifi is not available")
                 }
             }
         }
@@ -133,7 +137,7 @@ class CreateUserFragment : Fragment(),View.OnClickListener,DatePickerDialog.OnDa
             mFirstName.text.toString(),
             mLastName.text.toString(),
             gender,
-            "$mDate/$mMonth/$mYear",
+            mDob.text.toString(),
             mEmail.text.toString(),
             mCellNumber.text.toString(),
             userRole,
@@ -146,24 +150,24 @@ class CreateUserFragment : Fragment(),View.OnClickListener,DatePickerDialog.OnDa
     }
 
     private fun validate():Boolean {
-        val nameRegex:Regex = Regex("[a-zA-Z.? ]*")
+        val nameRegex:Regex = Regex("[a-zA-Z? ]*")
         val emailRegex:Regex = Regex("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")
-        var validate:Boolean = false
+        var validate:Boolean = true
         if(TextUtils.isEmpty(mUserid.text) || mUserid.length() < 0){
             mUserid.error ="Userid is wrong"
             validate = false
         }
 
-        if(TextUtils.isEmpty(mFirstName.text) || mFirstName.text.matches(nameRegex)){
+        if(TextUtils.isEmpty(mFirstName.text) ){
             mFirstName.error ="First Name is not proper"
             validate = false
         }
 
-        if(TextUtils.isEmpty(mLastName.text) || mLastName.text.matches(nameRegex) ){
+        if(TextUtils.isEmpty(mLastName.text) ){
             mLastName.error ="Last name is not proper"
             validate = false
         }
-        if(TextUtils.isEmpty(mEmail.text) || mEmail.text.matches(emailRegex)){
+        if(TextUtils.isEmpty(mEmail.text) ||  !android.util.Patterns.EMAIL_ADDRESS.matcher(mEmail.text).matches() ){
             mEmail.error ="Email is not proper"
             validate = false
         }
@@ -191,5 +195,23 @@ class CreateUserFragment : Fragment(),View.OnClickListener,DatePickerDialog.OnDa
       mYear = year
         mMonth = month
         mDate = dayOfMonth
+        val dob = "$mYear-$mMonth-$mDate"
+        mDob.setText(dob)
     }
+
+    fun showAlertMessage(message:String){
+        val builder1: AlertDialog.Builder = AlertDialog.Builder(mContext)
+        builder1.setMessage(message)
+        builder1.setCancelable(true)
+
+        builder1.setNegativeButton(
+            "Close",
+            DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+
+        val alert11: AlertDialog = builder1.create()
+        alert11.show()
+    }
+
+
+
 }

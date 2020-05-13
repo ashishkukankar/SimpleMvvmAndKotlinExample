@@ -5,14 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roche.R
 import com.example.roche.pojo.UserList
 
-class PosRecyclerAdapter(var userList:UserList) : RecyclerView.Adapter<RecyclerViewHolder>(){
+class PosRecyclerAdapter(var userList:UserList,var listener:clickPocListener) : RecyclerView.Adapter<RecyclerViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val layoutView = LayoutInflater.from(parent.context).inflate(R.layout.user_items, null)
-        return RecyclerViewHolder(layoutView)
+        return RecyclerViewHolder(layoutView,listener)
     }
 
     override fun getItemCount(): Int {
@@ -27,14 +28,18 @@ class PosRecyclerAdapter(var userList:UserList) : RecyclerView.Adapter<RecyclerV
 }
 
 
-class RecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+class RecyclerViewHolder(itemView: View,var listener: clickPocListener) : RecyclerView.ViewHolder(itemView),
     View.OnClickListener {
     var userId:TextView = itemView.findViewById(R.id.userid)
     var username:TextView = itemView.findViewById(R.id.username)
+    var layout:ConstraintLayout = itemView.findViewById(R.id.layout)
+    init {
+        layout.setOnClickListener(this)
+    }
 
 
     override fun onClick(v: View?) {
-
+        listener.onItemClicListener(adapterPosition)
     }
 
 }

@@ -7,7 +7,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -69,7 +69,7 @@
         android:id="@+id/gendertext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="last Name"
+        android:text="Gender"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lastNameedit"
         tools:layout_margin="10dp" />
@@ -87,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Male"
+            android:checked="true"
             />
         <RadioButton
             android:id="@+id/femalerbtn"
@@ -96,11 +97,12 @@
             android:text="Female"
             />
     </RadioGroup>
+
     <TextView
         android:id="@+id/dobtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="last Name"
+        android:text="Date Of birth"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/radiogrp"
         tools:layout_margin="10dp" />
@@ -109,15 +111,18 @@
         android:id="@+id/dobedit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="last name"
+        android:hint="date"
         app:layout_constraintTop_toBottomOf="@+id/dobtext"
-        tools:layout_margin="10dp" />
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_margin="10dp"
+        android:clickable="true"
+        android:focusable="false"/>
 
     <TextView
         android:id="@+id/emailtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="last Name"
+        android:text="Email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dobedit"
         tools:layout_margin="10dp" />
@@ -126,15 +131,16 @@
         android:id="@+id/emailedit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="last name"
+        android:hint="email"
         app:layout_constraintTop_toBottomOf="@+id/emailtext"
+        tools:layout_editor_absoluteX="10dp"
         tools:layout_margin="10dp" />
 
     <TextView
         android:id="@+id/cellnotext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="last Name"
+        android:text="Cell Number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailedit"
         tools:layout_margin="10dp" />
@@ -143,15 +149,16 @@
         android:id="@+id/cellnoedit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="last name"
+        android:hint="Cell Number"
         app:layout_constraintTop_toBottomOf="@+id/cellnotext"
+        tools:layout_editor_absoluteX="10dp"
         tools:layout_margin="10dp" />
 
     <TextView
         android:id="@+id/addresstxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="last Name"
+        android:text="Address"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cellnoedit"
         tools:layout_margin="10dp" />
@@ -160,7 +167,7 @@
         android:id="@+id/addressedit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="last name"
+        android:hint="Address"
         app:layout_constraintTop_toBottomOf="@+id/addresstxt"
         tools:layout_margin="10dp" />
 
@@ -187,6 +194,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Patient"
+            android:checked="true"
             />
         <RadioButton
             android:id="@+id/clinicianrbtn"
@@ -209,7 +217,7 @@
         android:id="@+id/hospitalidedit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="last name"
+        android:hint="Hospital Id"
         app:layout_constraintTop_toBottomOf="@+id/hospitalidtxt"
         tools:layout_margin="10dp" />
 
@@ -243,7 +251,7 @@
         android:id="@+id/deviceedit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Doctor Id"
+        android:hint="Device Id"
         app:layout_constraintTop_toBottomOf="@+id/devicetxt"
         tools:layout_margin="10dp" />
 
@@ -258,5 +266,16 @@
         app:layout_constraintTop_toBottomOf="@id/deviceedit"
         tools:layout_margin="10dp" />
 
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.331"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
